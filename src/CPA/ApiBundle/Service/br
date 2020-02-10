@@ -1,0 +1,45 @@
+$accessToken = $tokenOAuth;
+        $auth = $this->findAuthCodeByToken($accessToken, $em);
+        $array_auth = array();
+        $array_auth = $auth;
+        $user_id = $auth[0]['user_id'];
+        $user = $em->getRepository('UserBundle:User')->findUserById($user_id);
+        $array_find_all_salary = array();
+        $index_find_all_salary = 0;
+        if ($user) {
+            $Salary = $em->getRepository('UserBundle:Salary')->findSalarybyUser($user);
+            if ($Salary) {
+
+                if (count($Salary) == 1) {
+                    $bulletins = $em->getRepository('UserBundle:SignedDoc')->findBseBySalary($Salary);
+                }
+                if (count($Salary) > 1) {
+                    foreach ($Salary as $key => $value) {
+                        $array_find_all_salary[$index_find_all_salary] = $this->findBulletinBySalaryArray($dateDebut, $dateFin, $value['id'], $em);
+                        $index_find_all_salary ++;
+                    }
+
+//                    $bulletins = $em->getRepository('UserBundle:SignedDoc')->findBseByArraySalary($array_Salary_id);
+//                    $array_id_signeDoc = $em->getRepository('UserBundle:SignedDoc')->findIdDocSigneByArraySalary($array_Salary_id);
+                    //findIdDocSigneByArraySalary
+//                    return new Response(dump($array_find_all_salary));
+                    foreach ($array_find_all_salary as $key => $value) {
+                        if ($value) {
+//                            return new Response(dump($value));
+                            $JsonResponse = new JsonResponse(array("listeBulletin" => $value));
+                            return $JsonResponse;
+                        }
+                    }
+                }
+
+
+//                $JsonResponse = new JsonResponse(array("tab" => $bulletins));
+//                return $JsonResponse;
+//                 $salary_id
+//                 $bulletins = $em->getRepository('UserBundle:SignedDoc')->findBseBySalary($Salary);
+            }
+        } else {
+            throw new AccessDeniedException();
+        }
+
+"friendsofsymfony/user-bundle": "^2.0",

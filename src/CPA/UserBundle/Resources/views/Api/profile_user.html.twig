@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        <a href="{{path('acme_oauth_server_auth_login_check')}}"><h3>Déconnexion</h3></a>
+    </div>
+    <h1 class="page-header text-center">
+        Bienvenue  {{salary[0].nom ~ ' ' ~ salary[0].prenom }}  dans votre compte d'activité personelle
+
+        {#{ app.user ? app.user.email : 'Aquanauts' }#}
+    </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <span class="panel-icon">
+                            <i class="fa fa-user fa-2x align-icon"></i>
+                        </span>
+                        <span class="panel-title"> Salarié {{salary[0].nom ~ ' ' ~ salary[0].prenom }} </span>
+                        <br/>
+                        <br/>
+                        {{ form_start(form) }}
+                        {{ form_row(form.date_debut) }}
+                        {{ form_row(form.date_fin) }}
+                        {{ form_end(form) }}
+
+<!--a href="{#{path('api_liste_bulletin')}#}?access_token={#{accesstoken}#}" >
+
+    <span class="panel-title"> liste des bulletins de salaire</span>
+</a-->
+<!--a href="{#{path('liste_bulletin')}#}?access_token={#{accesstoken}#}" >
+
+                        <!--span class="panel-title"> liste des bulletins</span-->
+                        <!--/a-->
+                        <button id="search_bulltin" onclick="SearchSuperBulletin({{salary[0].id}})"  class="btn btn-info">
+                            <span>Chercher</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <ul id="mytabs" class="nav nav-pills">
+                    <!--li class="active"><a href="#home" data-toggle="pill">Home</a></li-->
+                    <li class="active"><a href="#menu1" data-toggle="pill">Bulletins de paie</a></li>
+                    <li><a href="#menu2" data-toggle="pill">Documents</a></li>
+                    <li><a href="#menu3" data-toggle="pill">Autre Documents</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <div id="container_sg_liste_salary" style="display: block">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tab-pane">
+                                        <br/>
+
+                                        <table class="table table-condensed" id="liste_salary_bulltin">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Identifian Bulletin</th>
+                                                    <th>Employeur</th>
+                                                    <th>Date début</th>
+                                                    <th>Date fin</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="content_liste_bulletin">
+
+                                            </tbody>
+                                        </table>
+                                        <center>           
+
+                                        </center>
+
+                                    </div>
+
+                                </div>
+                            </div> 
+                        </div> 
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <!--h3>Documents</h3-->
+                        <!--p>Some content.</p-->
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <!--h3>Autre Documents</h3-->
+                        <!--p>Some content.</p-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#mytabs").bootstrapDynamicTabs();
+            $("#container_sg_liste_salary").css('display', 'none');
+            $('.js-datepicker').datepicker();
+        });
+
+        function isObject(val) {
+            return val instanceof Object;
+        }
+        function SearchSuperBulletin(id) {
+
+
+
+
+            var results = {"salary_id": id};
+            //var url = '{#{path('liste_bulletin')}}?access_token={{accesstoken}#}';
+            var url = '{{path('liste_bulletin')}}?access_token={{accesstoken}}';
+            $.ajax({
+                url: url,
+                type: "GET", //POST
+                data: JSON.stringify(results),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (data)
+                {
+                    //alert(data);
+                    console.log('data');
+                    //console.log(data[]);
+                    //var items = [];
+                    $.each(data, function (key, val) {
+                        //alert(val[0].signature);//signature
+                        //items[key] = val.signature;
+                    });
+
+
+                    //$("#container_sg_donateur_elasticsearch").css('display', 'block');
+                    //alert(data.logo);
+                },
+                complete: function (comp)
+                {
+                    //alert(comp.responseText);
+                    console.log('complete');
+                    console.log(comp);
+                     $.each(comp, function (index, value) {
+                            
+                           // console.log('each + comp');
+                             //console.log(value);
+
+
+                            //alert(key2);
+                            //alert(val2.signature);
+                        });
+                    var result = $.parseJSON(comp.responseText);
+                    console.log('parse json');
+                    console.log(result);
+                    $("#container_sg_liste_salary").css('display', 'block');
+                    //$(document).ready(function () {
+
+                    // });
+                    var items = [];
+                    $.each(result, function (key, val) {
+                        $.each(val, function (key2, val2) {
+                            items[key2] = val2;
+                            //console.log('val2');
+                           //console.log(val2.company);
+
+
+                            //alert(key2);
+                            //alert(val2.signature);
+                        });
+
+                    });
+
+
+                   
+                    
+                    //var res2 =  $.parseJSON(items2);
+                    var lignetbody1 = '';
+                    for (var i = 0; i < items.length; i++) {
+                        //var tt = isObject(items[i]);
+
+                        //alert(items[i].company);
+                        lignetbody1 += "<tr><td>" + items[i].id + "</td><td>" + items[i] + "</td><td>" + items[i] + "</td><td>" + items[i] + "</td></tr>";
+                    }
+                    $("#content_liste_bulletin").append(lignetbody1);
+
+                    //$("#container_sg_liste_salary").css('display', 'block');
+                    //$("#container_sg_liste_salary").html(comp.responseText);
+
+                },
+                error: function (err) {
+                    console.log(err);
+                    //alert('err');
+                }
+            }
+            );
+        }
+    </script>
+{% endblock %}

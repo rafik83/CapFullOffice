@@ -1,0 +1,62 @@
+// teste user in  keolis_test
+        $analyticsEm = $this->get('doctrine')->getManager('analytics');
+
+        $sql = "SELECT * FROM keolis_test.user
+
+where username = '2840299422026' ";
+        $stmt = $analyticsEm->getConnection()->prepare($sql);
+        $stmt->execute();
+        $tt = array();
+
+        $tt = $stmt->fetchAll();
+
+        foreach ($tt as $key => $value) {//username password salt id 
+            $id = $value['id'];
+            $username = $value['username'];
+            $password = $value['password'];
+            $salt = '9099396596f6700d3e5b'; //$value['salt'];
+//            var_dump($value);
+//            die('houni');
+        }
+        $bool = false;
+        if (hash('sha512', $salt . '1234') == $password) {
+            $bool = true;
+        }
+        var_dump($bool);
+        die($bool);
+        $db = $this->container->get('doctrine')->getManager('default'); //getManager('default')
+
+        $user = $db->getRepository('UserBundle:User')->find(7);
+        $encoder = $this->container->get('security.password_encoder');
+        var_dump($encoder->isPasswordValid($user, '1234'));
+        die('ici');
+
+
+//        $encoder2 = $this->container->get('security.encoder_factory');
+//        var_dump($encoder2);
+//        die('nnn');
+//         var_dump($db);
+//        die('$analyticItem');
+        $u = new User();
+        $u->setEmail('anonymous@intersa.fr');
+        $u->setUsername($username);
+        $u->setSalt($salt);
+
+//        var_dump($encoder->isPasswordValid($u, $u->getPassword()));
+        $encoder = $this->container->get('security.encoder_factory')->getEncoder($u);
+        $bool = $encoder->isPasswordValid($password, '1234', $salt);
+        var_dump($bool);
+        die();
+//        
+//        $encoder = $this->container->get('security.password_encoder');
+        $encoder = $this->container->get('security.encoder_factory')->getEncoder($u);
+        $password = $encoder->encodePassword('1234', $salt);
+//        $password = $encoder->
+//        var_dump($password);
+//        die('$password');
+        // dBTJqZXp0QBeSmj/xRA89Ar95HOQWe66OpvzTxVNQMoL0if/w2bXvDXJWNp8CJviEOCj3rlMdmLM06JQx5PMvA==
+        $u->setPassword($password);
+        $u->setEnabled(1);
+        $db->persist($u);
+        $db->flush();
+        die('$analyticItem');

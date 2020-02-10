@@ -1,0 +1,23 @@
+{#% extends "FOSOAuthServerBundle::layout.html.twig" %#}
+{% trans_default_domain 'FOSOAuthServerBundle' %}
+{% block fos_oauth_server_content %}
+<!--h2>The application "{{ client.id }}" would like to connect to your account</h2 fos_oauth_server_authorize'  fos_oauth_server_token-->
+<h2>L'application souhaite se connecter à votre compte</h2>
+
+{{ form_start(form, {'method': 'POST', 'action': path('fos_oauth_server_authorize'), 'label_attr': {'class': 'fos_oauth_server_authorize'} }) }}
+
+{#{ form_start(form, {'method': 'POST', 'action': path('fos_oauth_server_token'), 'label_attr': {'class': 'fos_oauth_server_token'} }) }#}
+<!--input class="btn btn-primary" type="submit" name="accepted" value="{#{ 'authorize.accept'|trans({}, 'FOSOAuthServerBundle') }#}" /-->
+<input class="btn btn-success" type="submit" name="accepted" value="{{ 'Autoriser' }}" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--input class="btn" type="submit" name="rejected" value="{#{ 'authorize.reject'|trans({}, 'FOSOAuthServerBundle') }#}" /!-->
+
+<input class="btn btn-danger" type="submit" style="font-size: 16px;" name="rejected" value="{{ 'Annuler' }}">
+{{ form_row(form.client_id) }}
+{{ form_row(form.response_type) }}
+{{ form_row(form.redirect_uri) }}
+{{ form_row(form.state) }}
+{{ form_row(form.scope) }}
+{{ form_rest(form) }}
+</form>
+{% endblock fos_oauth_server_content %}

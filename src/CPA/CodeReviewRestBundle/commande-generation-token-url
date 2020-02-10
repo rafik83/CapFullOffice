@@ -1,0 +1,77 @@
+http://www.ikonenn.com/symfony2/fosoauthserverbundle-avec-fosuserbundle/
+
+http://symfonyapp.com/app_dev.php/oauth/v2/token?client_id=13_6bf6u1anjyosckws4g4ckc8oscws0sswc4kk04g4k8w8wcsgss&client_secret=t7ibkbeqwao000s4wcso0sws8o40w00osssoso804g4o8sw0k&grant_type=client_credentials
+
+exemple:
+
+http://knpsf3.dev/app_dev.php/oauth/v2/token?client_id=6_5cs9awec7zks0c00k08sw0oswck00swcokcgkso84cggkwwc8k&client_secret=llww47r924g0koos00w4ko0kgw4o80w4cwko0cws8w8084ws4&grant_type=client_credentials
+
+
+http://blog.logicexception.com/2012/04/securing-syfmony2-rest-service-wiith.html:
+
+http://acme.localhost/app_dev.php/oauth/v2/token?client_id=4f8e5bb57f8b9a0816000000_1xwgejzp1e3o8sgosc884cgoko44wgg4gc0s84ckw0c0sk4c4s&client_secret=147v1qcgxvuscg4owg4480ww484kc0ow0cwgkw0c4g4g8oowkc&grant_type=authorization_code&redirect_uri=http%3A%2F%2Fwww.google.com&code=6c7136745d8556650cb5e0d5cd53029c925aae72
+
+{
+    "access_token": "8315796acc79f6a1bfb4e4935aea01362d59ecce",
+    "expires_in": 3600,
+    "token_type": "bearer",
+    "scope": null,
+    "refresh_token": "da359ceafe501fd2445df0a6c406953264e54c47"
+}
+
+https://stackoverflow.com/questions/43149918/user-authentication-flow-with-fosuserbundle-fosoauthserverbundle?rq=1
+
+rest:
+            pattern: ^/rest(?!/doc)
+            fos_oauth: true
+            stateless: true
+            anonymous: false
+
+
+api_anonym_area:
+    pattern: (^/api/forgotten-password/.*)
+    stateless:  true
+    fos_oauth:  true
+    anonymous: true
+
+
+rest_doc:
+    pattern: ^/rest/doc
+    fos_oauth: true
+    stateless: true
+    anonymous: true
+
+
+To sign in with refresh token just:
+
+/oauth/v2/token?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&grant_type=refresh_token&refresh_token=REFRESH_TOKEN
+
+
+
+oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            form_login:
+                 provider: fos_userbundle
+                 check_path: /oauth/v2/auth/login_check
+                 login_path: /oauth/v2/auth/login
+            anonymous: true
+
+
+/oauth/v2/auth/login
+
+https://bitgandtter.blog/2015/09/10/symfony-a-restful-app-security-fosoauthserverbundle/
+
+very good tutorial with oauth2:
+https://gist.github.com/lologhi/7b6e475a2c03df48bcdd
+
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-4-implementing-custom-grant-type-symfony2-fosoauthserverbundle/
+
+
+
+https://github.com/knpuniversity/oauth2-client-bundle
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-5-implementing-oauth2-client-symfony2/
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-3-using-oauth2-bare-hands/
+

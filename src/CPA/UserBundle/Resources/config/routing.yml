@@ -1,0 +1,58 @@
+user_homepage:
+    path:     /index-default-user-bundle
+    defaults: { _controller: UserBundle:Default:index }
+    
+    
+authorisation_controller:
+    path:     /authorize
+    defaults: { _controller: UserBundle:Auth:auth }
+    
+    
+
+    
+    
+api_user_profile:
+    path:     /user/profile
+#    path:     /api/user/profile/{token}
+    defaults: { _controller: UserBundle:Default:profileUser }
+#    defaults: { _controller: UserBundle:Api:profileUser }
+#    requirements: 
+#        token: ".+"
+liste_bulletin:
+    path:     /user/bse
+    defaults: { _controller: UserBundle:Default:listeBulletin }    
+    
+acme_oauth_server_auth_login:
+#    path:     /{url}
+#    path:     /oauth/v2/auth_login
+    path:     /oauth/v2/{token}
+    defaults: { _controller: UserBundle:Security:login }
+    requirements: 
+        token: ".+"
+    methods:    [ GET|POST ]
+    
+    
+    #{url} {token}
+
+redirect_for_auth_login:
+    path:     /redirect-login
+    defaults: { _controller: UserBundle:Security:urlRedirectionLogin }
+
+    
+    
+acme_oauth_server_auth_login_check:
+#    path:     /oauth/v2/auth_login_check
+#    path:     /logouts
+    path:     /oauth/login
+    defaults: { _controller: UserBundle:Security:loginCheck }
+#    path:     /{token}
+#    requirements:
+#        token: ".+"
+#    path:     /oauth/v2/auth_login_check
+#    defaults: { _controller: UserBundle:Security:loginCheck }
+    
+#logout_oauth:
+#    path:     /logout
+#    defaults: { _controller: UserBundle:Security:loginCheck }
+    
+

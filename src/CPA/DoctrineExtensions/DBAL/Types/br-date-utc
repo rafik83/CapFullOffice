@@ -1,0 +1,31 @@
+
+$day = '25';
+        $month = '08';
+        $year = '2017';
+        $heure = '10:52:07';
+        $tt = $day . '/' . $month . '/' . $year . ' ' . $heure;
+        $tt1 = $day . '-' . $month . '-' . $year . ' ' . $heure;
+        $tt3 =  $month . '/' . $year;
+//        $formaD = 'd/m/Y';
+//        $formaD = 'd/m/Y';
+//        $formaD2 = 'dd/mm/yy hh:mm:ss';
+        $formaD3 = 'd/Y';
+        //$from = \DateTime::createFromFormat('yy-mm-dd hh:mm:ss', $post['started_at']);
+//        $pp = new \DateTime($tt);
+//        $pp->format('d-m-Y H:i:s');
+//        $pp->setTimezone(new \DateTimeZone('UTC'));
+        //->setParameter('date', $currentDate->format('Y-m-d H:i:s'))
+        $DateUtc = \DateTime::createFromFormat($formaD3, $tt3);
+        
+        $DateUtc2 = \DateTime::createFromFormat($formaD3, $tt3);
+//        $date = \UTCDateTimeType::createFromFormat($formaD, $tt);
+        //$DateUtc = new \DateTime('now');
+//        $yy= new \DateTimeZone('UTC');
+        $DateUtc2->setTimezone(new \DateTimeZone('UTC'));
+//        $date = new \UTCDateTimeType();
+//        dump($DateUtc);
+         dump($DateUtc);
+         dump($DateUtc2);
+
+//        dump($date->getTimezone());
+        die('date');

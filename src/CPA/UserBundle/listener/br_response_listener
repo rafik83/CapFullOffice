@@ -1,0 +1,75 @@
+ if ($isEndPointSubmit) {
+
+            dump($event->getRequest()->getPathInfo());
+            die('onKernelResponse + $isEndPointSubmit = true');
+//            die('$event->getRequest()');
+            if ($event->getRequest()->attributes) {
+//                die('attributes');
+                foreach ($event->getRequest()->attributes as $key => $value) {
+//                        die('foreach');
+//                    $array_parametres[$key] = $value;
+                    if ($value == 'fos_oauth_server_authorize') {
+                        $route = $value;
+                    }
+//            var_dump('key');
+//            dump($key);//_route
+//            var_dump('value');
+//            dump($value);
+                }
+            }
+        }
+
+        $route = '';
+        $array_tt = array();
+        $array_en_point = array();
+        if ($isEndPointSubmit) {
+            die('onKernelResponse + $isEndPointSubmit = true');
+            if ($route != '') {
+                //fos_oauth_server_authorize
+//            die('$array_parametres');
+                if ($route != '') {
+
+
+//                foreach ($array_parametres as $key => $value) {
+////                    dump($value);
+//                    if ($value == 'fos_oauth_server_authorize') {
+//                        $route = $value;
+//                    }
+//                }
+//                dump($array_parametres[5]);
+//                die('_route');
+                    if ($route != '') {
+                        die('_route');
+                        if ($route == 'fos_oauth_server_authorize') {
+                            die('1');
+                            if ($event->getResponse()->headers) {
+                                die('1');
+                                $array_tt = $event->getResponse()->headers;
+                                if (count($array_tt) > 0) {
+                                    die('1');
+                                    foreach ($array_tt as $key => $value) {
+                                        $array_en_point[$key] = $value; //location
+                                    }
+                                    if (count($array_en_point) > 0) {
+                                        die('1');
+                                        $array_uri_enpoint = $array_en_point['location'];
+                                        if (count($array_uri_enpoint) > 0) {
+                                            $uri_enpoint = $array_uri_enpoint[0];
+                                            if ($uri_enpoint) {
+                                                die('1');
+                                                $explode1 = explode('&code=', $uri_enpoint);
+                                                if (count($explode1) > 0) {
+                                                    $code = $explode1[1];
+                                                    die('1');
+                                                    $this->functionSetTokenForAccessRefreshToken($code);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }

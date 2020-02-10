@@ -1,0 +1,27 @@
+code_review_rest_homepage:
+    path:     /index-action-code-review
+    defaults: { _controller: CodeReviewRestBundle:Default:index }
+    
+    
+#code_review_rest_liste_bse:
+#    path:     /bse
+#    defaults: { _controller: CodeReviewRestBundle:Default:listeBulletin }
+#    
+#code_review_rest_download_bse:
+#    path:     /bse/{identifiantBse}
+#    defaults: { _controller: CodeReviewRestBundle:Default:downloadBulletin }
+    
+    
+    
+#api_articles:
+#    path:     /articles
+#    defaults: { _controller: CodeReviewRestBundle:Api:articles }
+#    
+#api_user:
+#    path:     /user
+#    defaults: { _controller: CodeReviewRestBundle:Api:user }
+    
+    
+#authorisation_controller:
+#    path:     /authorize
+#    defaults: { _controller: CodeReviewRestBundle:Auth:auth }

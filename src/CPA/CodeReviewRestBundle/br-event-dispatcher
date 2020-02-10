@@ -1,0 +1,16 @@
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\Event;
+
+$dispatcher = new EventDispatcher();
+        $listener = new AcmeListener();
+        $dispatcher->addListener('acme.foo.action', array($listener, 'onFooAction'));
+        $dispatcher->addListener('acme.foo.action', function (Event $event) {
+            // will be executed when the acme.foo.action event is dispatched
+        });
+
+
+$dispatcher = new EventDispatcher();
+        $listener = new CpaListener();
+        $dispatcher->addListener('cpa.foo.action', array($listener, 'onFooAction'));
+
+https://stackoverflow.com/questions/43612879/how-tout-use-kernel-terminate-event-in-a-service

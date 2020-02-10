@@ -1,0 +1,142 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    adoy_oauth2.client.class: OAuth2\Client
+#    stark_industries_client.client.class: CPA\OAuthServerBundle\Service\OAuth2Client
+#    platform.entity.user.class: CPA\UserBundle\Entity\User
+#    platform.user.provider.class: CPA\UserBundle\Provider\WebserviceUserProvider
+#    parameter_name: value
+
+
+services:
+    app.markdown_transformer:
+        class: AppBundle\Service\MarkdownTransformer
+        arguments: ['@markdown.parser', '@doctrine_cache.providers.my_markdown_cache']
+
+    app.markdown_extension:
+        class: AppBundle\Twig\MarkdownExtension
+        tags:
+            - { name: twig.extension }
+        #arguments: ['@app.markdown_transformer']
+        autowire: true
+
+#    app.security.login_form_authenticator:
+#        class: AppBundle\Security\LoginFormAuthenticator
+##        arguments: [ "@form.factory" ,"@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder'] 
+#        arguments: [ "@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder', '@security.csrf.token_manager', '@request_stack']
+#        autowire: true
+
+    app.doctrine.hash_password_listener:
+        class: AppBundle\Doctrine\HashPasswordListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber }
+            
+    redirectionListener:
+        class: CPA\UserBundle\listener\RedirectionListener
+        arguments: ["@security.token_storage","@doctrine.orm.entity_manager", "@service_container", "@session", "@request_stack","@router"]
+        tags:
+#            - { name: kernel.event_listener, event: kernel.request, method: onkernelRequest, priority: 255}
+            - { name: kernel.event_listener, event: kernel.request, method: onkernelRequest }
+            
+#    app.kernel.terminate.listener:
+#        arguments: ["@kernel"]
+#        class: CPA\UserBundle\listener\KernelTerminateListener
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.terminate }
+            
+    responseListener:
+        class: CPA\UserBundle\listener\ResponseListener
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+        tags:
+#            - { name: kernel.event_listener, event: kernel.request, method: onkernelRequest, priority: 255}
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+            
+    app.security.authentification.cpa:
+        class: CPA\UserBundle\Service\AuthentificationCpa
+#        arguments: [ "@form.factory" ,"@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder'] 
+        arguments: [ "@session", "@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder', '@security.csrf.token_manager', '@request_stack']
+        
+    app.liste.bulletin.cpa:
+        class: CPA\ApiBundle\Service\ListeBulletinCpa
+#        arguments: [ "@form.factory" ,"@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder'] 
+        arguments: [ "@session", "@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder', '@security.csrf.token_manager', '@request_stack']
+        
+    app.bulletin.pdf.cpa:
+        class: CPA\ApiBundle\Service\BulletinPdfSalaryCpa
+#        arguments: [ "@form.factory" ,"@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder'] 
+        arguments: [ "@service_container", "@session", "@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder', '@security.csrf.token_manager', '@request_stack']
+        
+        
+    cert_sign.server:
+        class:        CPA\ApiBundle\WebServices\CertSignServer
+        arguments:    [%local_cert%, %login%, %password%, %location%, %profile_con%, %profile_s%, %profile_arc%, %profile_sto%, %profile_doc%, %signer%, %auth_pass%, %algo%]
+    
+    app.security.login_form_authenticator:
+        class: CPA\UserBundle\Security\LoginFormAuthenticator
+#        arguments: [ "@form.factory" ,"@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder'] 
+        arguments: [ "@session", "@doctrine", "@doctrine.orm.entity_manager", '@router', '@security.password_encoder', '@security.csrf.token_manager', '@request_stack']
+    
+    
+    my.encoder.cpa:
+        class: CPA\UserBundle\Service\MyEncoderSha512
+       
+
+#        
+#    platform.user.manager:
+#        class: Doctrine\ORM\EntityManager
+#        factory_method: getManagerForClass
+#        factory_service: doctrine
+#        arguments: ['%platform.entity.user.class%']
+#        
+#    platform.user.repository:
+#        class: CPA\UserBundle\Repository\UserRepository
+#        factory_method: getRepository
+#        factory_service: platform.user.manager
+#        arguments: ['%platform.entity.user.class%']
+#        
+#    platform.user.provider:
+#        class: %platform.user.provider.class%
+#        arguments: ['@platform.user.repository']
+            
+            
+    platform.user.manager:
+        class: Doctrine\ORM\EntityManager
+        factory: ['@doctrine','getManagerForClass']
+        arguments: ['CPA\UserBundle\Entity\User']
+#        autowire: true
+       
+    platform.user.repository:
+        class: CPA\UserBundle\Repository\UserRepository
+        factory: ['@platform.user.manager','getRepository']
+        arguments: ['CPA\UserBundle\Entity\User']
+#        autowire: true
+        
+    platform.user.provider:
+        class: CPA\UserBundle\Provider\WebserviceUserProvider
+        arguments: ['@platform.user.repository']
+
+    platform.grant_type.api_key:
+        class: CPA\UserBundle\OAuth\ApiKeyGrantExtension
+        tags:
+            - { name: fos_oauth_server.grant_extension, uri: 'http://platform.local/grants/api_key' }
+        arguments: ['@platform.user.repository']
+        
+#    adoy_oauth2.client:
+#        class: %adoy_oauth2.client.class%
+#        arguments: ['%oauth2_client_id%', '%oauth2_client_secret%']
+#        
+#    stark_industries_client.credentials_client:
+#        class: %stark_industries_client.client.class%
+#        arguments: ['@adoy_oauth2.client', '%oauth2_auth_endpoint%', '%oauth2_token_endpoint%', '%oauth2_redirect_url%', client_credentials, { client_id: '%oauth2_client_id%', client_secret: '%oauth2_client_secret%' }]
+#    
+#    stark_industries_client.authorize_client:
+#        class: %stark_industries_client.client.class%
+#        arguments: ['@adoy_oauth2.client', '%oauth2_auth_endpoint%', '%oauth2_token_endpoint%', '%oauth2_redirect_url%', authorization_code, { redirect_uri: '%oauth2_redirect_url%' }]
+        
+    
+
+
+    
+
+

@@ -1,0 +1,129 @@
+
+
+namespace AppBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Form\LoginForm;
+
+class SecurityController extends Controller
+{
+    /**
+     * @Route("/oauth/v2/auth", name="security_login")
+     */
+    public function loginAction()
+    {
+//        die('here');
+        $authenticationUtils = $this->get('security.authentication_utils');
+
+//        var_dump($authenticationUtils);
+//        die('here');
+        //oauth/v2
+        //  /login
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+//         var_dump($error);
+//        die('$error');
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        $form = $this->createForm(LoginForm::class, [
+            '_username' => $lastUsername,
+        ]);
+//        var_dump($error);
+//        die('$form');
+    
+        return $this->render(
+            'security/login.html.twig',
+            array(
+                'form' => $form->createView(),
+                'error' => $error,
+            )
+        );
+    }
+
+    /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logoutAction()
+    {
+//        throw new \Exception('this should not be reached!');
+    }
+}
+
+
+
+
+ /**
+     * @Route("/redirect/url", name="redirect_url")
+     * @Method({"GET"})
+     */
+--------------------------------
+ /**
+     * @Route("/redirect/url", name="redirect_url")
+     * @Method({"GET"})
+     */
+    public function redirectUrlAction(Request $request) {
+
+        die('RedirectUrl');
+        $em = $this->getDoctrine()->getManager();
+        $client = $em->getRepository('OAuthServerBundle:Client')->find(4);
+        $id = $client->getId();
+        $randomId = $client->getRandomId();
+        $client_id = $id . '_' . $randomId;
+        $secret = $client->getSecret();
+        $data = $client->getRedirectUris();
+        $redirectUris = $data[0];
+        $md5 = md5(uniqid(mt_rand(), true));
+//        var_dump($request->getSession()->get('oauth.state'));
+//        die('url');
+//        if (!$request->getSession()->get('oauth.state')) {
+//            $request->getSession()->set('oauth.state', $md5);
+//        }
+
+        $state = $request->getSession()->get('oauth.state');
+        $first8 = substr($state, 0, 8);
+        $state2 = substr($state, 8);
+        $first4 = substr($state2, 0, 4);
+        $state3 = substr($state2, 4);
+        $first42 = substr($state3, 0, 4);
+        $state4 = substr($state3, 4);
+        $first43 = substr($state4, 0, 4);
+        $therest = substr($state, 20, 12);
+        $state_finale = $first8 . '-' . $first4 . '-' . $first42 . '-' . $first43 . '-' . $therest;
+
+        $parameters = [
+            'response_type' => 'code',
+            'client_id' => $client_id,
+            'redirect_uri' => $redirectUris,
+            'scope' => 'read',
+            'state' => $state_finale,
+        ];
+        $url = Request::create($request->getUriForPath('/oauth/v2/auth'), 'GET', $parameters)->getUri();
+        var_dump($url);
+        die('url');
+        return $this->redirect($url);
+    }
+
+//    public function loginAction(Request $request, AuthenticationUtils $authUtils) {
+////      // get the login error if there is one
+//        $error = $authUtils->getLastAuthenticationError();
+//
+//        // last username entered by the user
+//        $lastUsername = $authUtils->getLastUsername();
+////        var_dump($error);
+////        die('$form');
+//
+//        return $this->render('security/login.html.twig', array(
+//                    'last_username' => $lastUsername,
+//                    'error' => $error,
+//        ));
+//    }
+
+    /**
+     * @Route("/logout", name="security_logout")
+     */
+    public function logoutAction() {
+//        throw new \Exception('this should not be reached!');
+    }

@@ -1,0 +1,111 @@
+<?php
+
+namespace CPA\UserBundle\Entity;
+
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\Role\Role;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="signed_doc")
+ * @ORM\Entity(repositoryClass="CPA\UserBundle\Repository\SignedDocRepository")
+ */
+class SignedDoc {
+
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(name="record", type="string", length=255)
+     */
+    private $record;
+
+    /**
+     * @ORM\Column(name="signature", type="string", length=255)
+     */
+    private $signature;
+
+    /**
+     * @ORM\Column(name="doc", type="string", length=255)
+     */
+    private $doc;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="docSigne_fromBase", type="integer", length=11)
+     */
+    private $docSigne_fromBase;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="idSalary_fromBase", type="integer", length=11)
+     */
+    private $idSalary_fromBase;
+
+    /**
+     * @ORM\Column(name="ext", type="string", length=255, nullable=true)
+     */
+    private $ext;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CPA\UserBundle\Entity\Salary", cascade={"remove"})
+     * @ORM\JoinColumn(name="salary_id", nullable=false)
+     */
+    private $salary;
+
+    /**
+     * @ORM\Column(name="month", type="integer")
+     */
+    private $month;
+
+    /**
+     * @ORM\Column(name="year", type="integer")
+     */
+    private $year;
+
+    /**
+     * @ORM\Column(name="size", type="integer")
+     */
+    private $size;
+
+    /**
+     * @ORM\Column(name="obsolete", type="boolean", nullable=true)
+     */
+    private $obsolete;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(name="date_debut", type="datetime")
+     */
+    private $date_debut;
+
+    /**
+     * @ORM\Column(name="date_fin", type="datetime")
+     */
+    private $date_fin;
+
+//    public function __construct() {
+//        $this->obsolete = 0;
+//        $this->createdAt = new \Datetime();
+//        $this->date_debut = new \Datetime();
+//        $this->date_fin = new \Datetime();
+//    }
+
+
+
+
+    
+}

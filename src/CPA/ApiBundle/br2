@@ -1,0 +1,41 @@
+
+//        $tt = $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
+//        var_dump($tt);
+//        https://knpuniversity.com/screencast/symfony-rest/post-json-body#play
+//        https://knpuniversity.com/screencast/symfony-rest/form-post#play
+//        https://knpuniversity.com/
+//        https://knpuniversity.com/screencast/symfony-rest3/filtering
+//        die('articlesAction');
+
+        $access_token='Njk4OTJjOGVmMTBhZTc0MmU5YTZiZWM5M2NmNzEyM2Y3YjViZmYwNzA1OWIxNTBlYmNmZTU5ODQ5OGIwZjU1NQ';
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Content-Type,Accept");
+        header("Content-Type: application/json");
+        header("Accept: application/json");
+//        header("Authorization: Bearer Njk4OTJjOGVmMTBhZTc0MmU5YTZiZWM5M2NmNzEyM2Y3YjViZmYwNzA1OWIxNTBlYmNmZTU5ODQ5OGIwZjU1NQ");
+        
+//        $theHeaders = ['Content-Type' => 'application/json', 'Accept' => 'application/json','Authorization' => 'Bearer'.$access_token];
+        $headers = getallheaders();
+//        $Authorization = $headers['Authorization'];
+//        $explode = explode('Bearer', $Authorization);
+//        $access_token = $explode[1];
+        $body = $request->getContent();
+//        $body = $request->getContent();
+//        $tt = dump($access_token);
+        $data = json_decode($body, TRUE); //json_decode json_encode
+//        $data1 = $data['datedebut'];
+//        $body = $request->getBody()->getContents() ;
+//        $data2 = json_decode($request->getBody()->getContents(), true);
+        $articles = array('article1', 'article2', 'article3');
+//        return new Response($articles);
+        return new Response(dump($data['dateDebut']));
+//        return new JsonResponse($articles);
+//        return new Response($body);
+//        return $this->render('CodeReviewRestBundle:Api:index.html.twig');
+//        return new JsonResponse($body);
+//        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+////            die('true');
+//            $articles = array('article1', 'article2', 'article3');
+//            return new JsonResponse($articles);
+//        }
+//        die('articlesAction');

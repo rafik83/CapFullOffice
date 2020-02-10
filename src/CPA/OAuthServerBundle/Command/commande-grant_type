@@ -1,0 +1,142 @@
+php bin/console acme:oauth-server:client:create --redirect-uri="http://www.example.com/" --grant-type="authorization_code" --grant-type="password" --grant-type="refresh_token" --grant-type="token" --grant-type="client_credentials"
+
+	
+http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=2_34c4h4uu4s8444c0kck8owko4kgkocggws4ckcgo88wocg0gwc&client_secret=71f3so5n1aos8cscs0k4kcsg8kc84gwooc8k4gc0gogockowk&grant_type=client_credentials
+
+
+
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=4_35sjyzw44a0w4kokocc48oocgs0sg48sk8k8kowg044okowkoo&client_secret=3qsrqjwk5d4w4wck0oko8ss84os8ooo8ggc0s04g0skc0g44cw&grant_type=client_credentials
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=4_35sjyzw44a0w4kokocc48oocgs0sg48sk8k8kowg044okowkoo&client_secret=3qsrqjwk5d4w4wck0oko8ss84os8ooo8ggc0s04g0skc0g44cw&grant_type=client_credentials
+
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/auth?client_id=4_35sjyzw44a0w4kokocc48oocgs0sg48sk8k8kowg044okowkoo&response_type=code&redirect_uri=http//www.example.com/
+
+---------
+
+br
+
+public id 6_2qqlwedph6yosks0kw8sog0cgggw44gg48kogs404s4g44kw8g, secret 5cq0did00jggoogock4oo80oog0ccg4ocg800s000gccoosks4
+
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=6_2qqlwedph6yosks0kw8sog0cgggw44gg48kogs404s4g44kw8g&client_secret=5cq0did00jggoogock4oo80oog0ccg4ocg800s000gccoosks4&grant_type=client_credentials
+
+
+----create client(le client est une url)
+
+php bin/console acme:oauth-server:client:create --redirect-uri="http://www.example.com/" --grant-type="authorization_code" --grant-type="password" --grant-type="refresh_token" --grant-type="token" --grant-type="client_credentials"
+
+Added a new client with public id 9_3rxymv6it7swo4s0wscscooswkk88kswoksosco80scc8swg0g,
+
+secret 3bkjsjsxttic8soow4go4088kw0woccswo0k4s4ggw8sw40gwk
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/auth?client_id=9_3rxymv6it7swo4s0wscscooswkk88kswoksosco80scc8swg0g&response_type=code&redirect_uri=http://www.example.com/
+
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=9_3rxymv6it7swo4s0wscscooswkk88kswoksosco80scc8swg0g&client_secret=5cq0did00jggoogock4oo80oog0ccg4ocg800s000gccoosks4&grant_type=authorization_code&redirect_uri=http%3A%2F%2Fwww.example.com%2F&code=NGFlMDMwNDJmNTBhN2RkZTkzMDlhMzVmMjY4YWE4Y2FiY2UyMWVjODU3NGM5OTdhNmY5YzQwNGNlMjRkY2IyZQ
+
+    ------------------------
+
+ php bin/console acme:oauth-server:client:create --grant-type="http://platform.local/grants/api_key"
+Added a new client with public id 10_62qx5u4kzxsswo0cw4kw44kcks0g8cwgwgkwks48wk8wg0oo4c,
+
+ secret 5ew3ekb79ao8k8g804okgwgk8c0808gs4o0gosg004oks400gk
+
+http%3A%2F%2Fclinet.local%2F&code=CODE
+grant_type
+
+
+php bin/console acme:oauth-server:client:create --redirect-uri="http://knpsf3-test.dev/app_dev.php/authorize"   --grant-type="authorization_code" --grant-type="password" --grant-type="refresh-token" --grant-type="token" --grant-type="client_credentials"
+  
+--redirect-uri="http://oauth-client.local/authorize"
+
+
+-------------------
+ 
+Added a new client with public id 11_w3klpqh6h0088sg844ogow80ocw40wso4g0wkkkk0kggcso00, 
+
+secret 20nwgbqhi734csgskss0kkwcg48wwwo48gco8k0kso0ko04gc4
+-------------------
+
+with adoy:
+
+php bin/console oauth2:credentials
+
+Obtained Access Token: ZmRjYzdmYTAyMTQyZmRiNjA0MzMyYjg5MTZjZDcyYTRhMjFkMmMxMjEyZDNiYzkwNjhmOGQ4MjlmNWJlNjJkOQ
+Requesting: http://knpsf3-test.dev/app_dev.php/api/articles
+Response: array (
+  'result' => 'articlesAction',
+  'code' => 200,
+  'content_type' => 'text/html',
+)
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/auth_login?client_id=6_2qqlwedph6yosks0kw8sog0cgggw44gg48kogs404s4g44kw8g&response_type=code&redirect_uri=http%3A%2F%2Fexample.com%2F&scope=read
+
+     ----------------
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/auth_login?response_type=code&client_id=cpa_by_intersa&redirect_uri=https%3A%2F%2Fwww.moncompteactivite.gouv.fr%2Fidp%2Fobs%2Fedics%2Fcallback&state=9ca97ea1-b58d-4b7b-b3d4-2833290e26fe
+--------------------------------------
+ Added a new client with public id 13_3lulokfhouuckck0g44w4kg08cg840s8c84ow08sk8gg0w8sso, 
+
+secret 3qc4ynp4mqm8wowg4c4sosookkccg8o0gsckc0sksc4ss444kk
+
+  
+auth
+
+/**
+     * @Route("/authorize", name="authorisation_controller")
+     */     
+
+oauth2:credentials
+
+articles?access_token=ZDhlNjlmZDU1ZGU1MGIyMTI5ODkzY2ZjZDJiYjJiM2U5ODg4NzQ5NThiOGFhOTdmOGIwMzg3ZjhmZDdiZTU2Nw   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+php bin/console acme:oauth-server:client:create --redirect-uri="http://knpsf3-test.dev/app_dev.php/api/articles"   --grant-type="authorization_code" --grant-type="password" --grant-type="refresh-token" --grant-type="token" --grant-type="client_credentials"
+
+
+
+
+
+
+
+
+
+php bin/console acme:oauth-server:client:create --redirect-uri="http://knpsf3-test.dev/app_dev.php/authorize" --grant-type="authorization_code" --grant-type="password" --grant-type="refresh_token" --grant-type="token" --grant-type="client_credentials"
+
+
+https%3A%2F%2Fwww.moncompteactivite.gouv.fr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                           

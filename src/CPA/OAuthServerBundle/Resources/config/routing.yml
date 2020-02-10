@@ -1,0 +1,7 @@
+o_auth_server_homepage:
+    path:     /authorisation-page
+    defaults: { _controller: OAuthServerBundle:Default:index }
+    
+#authorisation_controller:
+#    path:     /authorize
+#    defaults: { _controller: OAuthServerBundle:Auth:auth }

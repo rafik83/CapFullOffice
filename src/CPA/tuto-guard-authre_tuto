@@ -1,0 +1,47 @@
+https://www.sitepoint.com/easier-authentication-with-guard-in-symfony-3/
+
+How to override exception messages + foso:
+
+https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issues/337
+
+test_refresh:
+http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=5_191zafy58rvo04kw4088o44wsk0ksgccwgks4c8s4k4ck4kgg8&client_secret=9j1nc7w4dzoc488gscgo8c08w8ssos0c8o0kwgko0woso4w0g&grant_type=client_credentials
+
+http://knpsf3-test.dev/app_dev.php/oauth/v2/auth?client_id=7_4rs0ia42v4e8wowcoco08w0ssg400ss08osk0wgo08c08k80wk&response_type=code&redirect_uri=http%253A%252F%252Fwww.example.com&scope=read&state=6b00285a-f490-a75f-dfd8-40e5e00bf844
+
+
+
+github + fosoauth:
+
+https://github.com/FriendsOfSymfony/oauth2-php/blob/master/tests/OAuth2Test.php#L485
+
+
+
+foso + github + problem token:
+
+https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issues/176
+
+
+documentation officel + foso + oauth2 + github:
+
+https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/blob/master/Resources/doc/index.md
+
+doc + blog + important + foso oauth2:
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-2-setting-up-oauth2-with-symfony2-using-fosoauthserverbundle/
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-3-using-oauth2-bare-hands/
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-2-setting-up-oauth2-with-symfony2-using-fosoauthserverbundle/
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-2-setting-up-oauth2-with-symfony2-using-fosoauthserverbundle/
+
+https://causeyourestuck.io/2016/07/19/oauth2-explained-part-3-using-oauth2-bare-hands/
+
+Symfony 3 - Create own user provider - Error Service + github:
+
+https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/issues/396
+
+foso + refresh + storage + stackoverflow:
+
+https://stackoverflow.com/questions/43160538/oauth2-server-php-not-returning-refresh-token

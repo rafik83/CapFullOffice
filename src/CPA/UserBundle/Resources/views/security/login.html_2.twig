@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!-- Start: Main -->
+    <div id="main" class="animated fadeIn">
+
+        <!-- Start: Content-Wrapper -->
+        <section id="content_wrapper">
+
+            <!-- Begin: Content -->
+            <section id="content">
+
+                <div class="admin-form theme-info mw500" id="login">
+
+                    <!-- Login Logo -->
+                    <div class="row table-layout">
+                        <h1 class="text-center img-responsive">
+                            <img src="{{ asset('images/logo_cpa.png') }}"  alt="Logo" />
+
+                        </h1>
+                    </div>
+
+                    <!-- Login Panel/Form -->
+                    <div class="panel mt30 mb25">
+
+                        {% if error %}
+                            <div class="alert alert-danger">
+                                <!--div>{#{ error.messageKey|trans(error.messageData, 'security') }#}</div-->
+                                <div>{{error}}</div>
+                            </div>
+                        {% endif %}
+
+                        <form name="login_form" class="form-signin console-form-auth" role="form" action="{#{ path('user_homepage') }#}" method="post">
+                            <div class="panel-body bg-light p25 pb15">
+                                <div class="section">
+                                    <label class="field-label text-muted fs14 mb10" for="login_form__username">Username</label>
+                                    <label for="username" class="field prepend-icon">
+                                        <input type="text" id="login_form__username" name="login_form[_username]" required="required"  placeholder="Username"  class="form-control" required autofocus>
+                                        <label for="username" class="field-icon">
+                                            <i class="fa fa-user"></i>
+                                        </label>
+                                    </label>
+
+                                </div>
+
+                                <div class="section">
+                                    <label for="login_form__password" class="field-label text-muted fs14 mb10">Mot de passe </label>
+                                    <label for="password" class="field prepend-icon">
+                                        <input type="password" id="login_form__password" class="form-control" name="login_form[_password]" placeholder="Mot de passe"  style="margin:0px;"  required>
+                                        <label for="password" class="field-icon">
+                                            <i class="fa fa-lock"></i>
+                                        </label>
+                                    </label>
+                                </div>
+
+
+                                <!--input type="hidden" id="get_uri_redirect" value="" -->
+
+
+                                <!--a href="">Register</a-->
+                            </div>
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                                   >
+                            <input type="hidden" id="login_form__token" name="login_form[_token]" value="{{token}}">
+
+                            <div class="panel-footer clearfix">
+                                <button type="submit" class="button btn-primary mr10 pull-right">Connexion</button>
+                                &nbsp;
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Registration Links -->
+                    <div class="login-links">
+                        <p>Copyright <b> Intersa </b>
+                        </p>
+                    </div>
+
+
+
+                </div>
+
+            </section>
+            <!-- End: Content -->
+
+        </section>
+        <!-- End: Content-Wrapper -->
+
+    </div>
+    <!-- End: Main -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock %}
+

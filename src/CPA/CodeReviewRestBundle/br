@@ -1,0 +1,87 @@
+
+php bin/console doctrine:fixtures:load --fixtures=src/CPA/CodeReviewRestBundle
+
+ public function indexAction(Request $request) {
+
+//        die('indexAction');
+
+
+        $session = $request->getSession();
+
+        $md5 = md5(uniqid(mt_rand(), true));
+        $request->getSession()->set('oauth.state', $md5);
+        $state = $request->getSession()->get('oauth.state');
+        $first8 = substr($state, 0, 8);
+        $state2 = substr($state, 8);
+        $first4 = substr($state2, 0, 4);
+        $state3 = substr($state2, 4);
+        $first42 = substr($state3, 0, 4);
+        $state4 = substr($state3, 4);
+        $first43 = substr($state4, 0, 4);
+        $therest = substr($state, 20, 12);
+        $state_finale = $first8 . '-' . $first4 . '-' . $first42 . '-' . $first43 . '-' . $therest;
+//        var_dump($state_finale);
+//        die;
+
+        $clientManager = $this->container->get('fos_oauth_server.client_manager.default');
+        $client = $clientManager->createClient();
+
+
+        $client->setRedirectUris(array('http://www.example.com'));
+
+
+//        $client->setAllowedGrantTypes(array('token', 'authorization_code'));
+//        $client->setAllowedGrantTypes(array('authorization_code'));//client_credentials
+//        $client->setAllowedGrantTypes(array('token'));
+        $client->setAllowedGrantTypes(array('authorization_code'));
+
+        $clientManager->updateClient($client);
+
+//        var_dump($client);
+//        die('hhhh');
+
+        // fos_oauth_server_authorize  fos_oauth_server_token
+//        return $this->redirect($this->generateUrl('fos_oauth_server_authorize', array(
+//                            'client_id' => $client->getPublicId(),
+////                            'client_secret' => $client->getSecret(),
+//                            'redirect_uri' => 'http://www.example.com',
+////                            'grant_type' => 'client_credentials',
+//                            'grant_type' => 'authorization_code',
+//                            'scope' => 'read',
+//                            'code' => $state_finale
+////                            'state' => $state_finale
+//        )));
+
+
+
+
+
+          return $this->redirect($this->generateUrl('fos_oauth_server_authorize', array(
+                            'client_id' => $client->getPublicId(),
+                            'redirect_uri' => 'http://www.example.com',
+                            'response_type' => 'code',
+                            'scope' => 'read',
+                            'state' => $state_finale
+        )));
+//        var_dump($client);
+//        die('houni rest controller');
+        //fos_oauth_server_token
+//        return $this->redirect($this->generateUrl('fos_oauth_server_authorize', array(
+//                            'client_id' => 'TopCluck',
+//                            'client_secret' => '1r40onn00ry8sco8cgcswk8ww0c8c8c4og4wcg4ckok44os840',
+//                            'redirect_uri' => 'http://www.example.com',
+//                            'grant_type' => 'authorization_code',
+//                            'scope' => 'read',
+//                            'state' => $state_finale
+//        )));
+//         $request = $http->post('/token', null, array(
+//            'client_id'     => 'TopCluck',
+//            'client_secret' => '2e2dfd645da38940b1ff694733cc6be6',
+//            'grant_type'    => 'authorization_code',
+//            'code'          => $code,
+//            'redirect_uri'  => $this->generateUrl('coop_authorize_redirect', array(), true),
+//        ));
+
+
+        return $this->render('CodeReviewRestBundle:Default:index.html.twig');
+    }

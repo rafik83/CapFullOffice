@@ -1,0 +1,70 @@
+https://stackoverflow.com/questions/40389073/symfony-oauth2-access-denied-when-using-token
+
+public function testCreate()
+  {
+      $clientManager = $this->client->getContainer()->get('fos_oauth_server.client_manager.default');
+      $client = $clientManager->createClient();
+      $client->setRedirectUris(array('http://www.example.com'));
+      $client->setAllowedGrantTypes(array('token', 'authorization_code', 'password'));
+      $clientManager->updateClient($client);
+      $crawler = $this->client->request(
+                       'POST',
+                       '/oauth/v2/token',
+                       array(),
+                       array(),
+                       array('CONTENT_TYPE' => 'application/json'),
+                       '{
+                         "grant_type":"password",
+                         "client_id":"' . $client->getId() . '_' . $client->getRandomId() . '",
+                         "client_secret":"' . $client->getSecret() . '",
+                         "username": "Alvaro",
+                         "password": "1231251265"
+                        }'
+                       );
+      $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+      $response = json_decode($this->client->getResponse()->getContent(), true);
+      $this->assertTrue( strlen($response['access_token']) > 10 );
+      $this->assertEquals( 'bearer', $response['token_type'] );
+      $this->assertTrue( strlen($response['refresh_token']) > 10 );
+      $this->assertEquals( 3600, $response['expires_in'] );
+      $crawler = $this->client->request(
+                                        'GET',
+                                        '/businesses', //@TODO: Move this to a common route
+                                        array(),
+                                        array(),
+                                        array('CONTENT_TYPE' => 'application/json'));
+      $this->assertEquals(401, $this->client->getResponse()->getStatusCode());
+      $crawler = $this->client->request(
+                                        'GET',
+                                        '/businesses', //@TODO: Move this to a common route
+                                        array(),
+                                        array(),
+                                        array('CONTENT_TYPE' => 'application/json', 'Authorization:Bearer' => $response['access_token']));
+      $this->assertEquals(200, $this->client->getResponse()->getStatusCode()); <-- failing assertion
+
+--------------
+
+http://williamdurand.fr/2012/08/02/rest-apis-with-symfony2-the-right-way/
+
+$client   = static::createClient();
+$crawler  = $client->request('GET', '/users');
+
+$response = $crawler->getResponse();
+
+$this->assertJsonResponse($response, 200);
+
+-----------------
+
+https://www.codevate.com/blog/12-securing-client-side-public-api-access-with-oauth-2-and-symfony
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: '^/', stop: true }
+    view:
+        view_response_listener: true
+    access_denied_listener:
+        json: true

@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+            <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-dynamic-tabs.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker-1.6.0.css') }}">
+
+            <link rel="stylesheet" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/signin.css') }}">
+
+
+
+
+<script src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
+        <!--script src="//code.jquery.com/jquery-2.1.4.min.js"></script-->
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-3.3.5/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-dynamic-tabs.js') }}"></script>
+        <script src="{{ asset('js/json-stringify.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datepicker-1-6-0.min.js') }}"></script>
+
+        <script src="{{ asset('js/ie-emulation-modes-warning.js') }}"></script>
+        <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>

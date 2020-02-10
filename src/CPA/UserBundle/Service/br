@@ -1,0 +1,90 @@
+if (count($Salarys) > 1) {
+                                        foreach ($Salarys as $key => $Salary) {
+                                            $DocSigne = $db->getRepository('UserBundle:SignedDoc')->findOneBy(array('salary' => $Salary));
+                                            if (!$DocSigne) {
+                                                $IdSalary = $Salary->getSalaryFromBase();
+                                                if ($nom_bdd != "" && $IdSalary != NULL) {
+                                                    $sql3 = "SELECT id, salary_id,ext,month,year, obsolete, created_at  FROM ";
+                                                    $sql3 .= " ";
+                                                    $sql3 .= $nom_bdd;
+                                                    $sql3 .= ".signed_doc";
+                                                    $sql3 .= " ";
+                                                    $sql3 .= " where salary_id ='" . $IdSalary . "'";
+                                                    $sql3 .= " ";
+                                                    dump($sql3);
+                                                    die('sql3');
+                                                    $stmt3 = $Alldb->getConnection()->prepare($sql3);
+                                                    $stmt3->execute();
+                                                    $resultSignedDoc = array();
+                                                    $resultSignedDoc = $stmt3->fetchAll();
+                                                    dump($resultSignedDoc);
+                                                    die('$resultSignedDoc');
+                                                    if (count($resultSignedDoc) == 1) {
+                                                        
+                                                    }
+//                                                   
+                                                }
+                                            }
+                                        }
+                                        //foreach
+                                        //if !docsigned
+                                    }
+
+
+-----------------------------------------------
+
+if (count($entity) > 1) {
+                die('count + entity > 1');
+                foreach ($entity as $key => $value) {
+
+//                    var_dump($value);
+//                    die('ici');
+                    $username = $value->getUsername();
+                    $nom_bdd = $value->getNomBdd();
+                    $sql = "SELECT * FROM"; //keolis_test // 28402994220260 1234 
+                    $sql .= " ";
+                    $sql .= $nom_bdd;
+                    $sql .= ".user";
+                    $sql .= " ";
+                    $sql .= " where username ='" . $username . "'";
+
+                    $stmt = $Alldb->getConnection()->prepare($sql);
+                    $stmt->execute();
+                    $result = array();
+                    $result = $stmt->fetchAll();
+                    foreach ($result as $key => $value) {
+                        $id3 = $value['id'];
+                        $username3 = $value['username'];
+                        $password3 = $value['password'];
+                        $salt3 = $value['salt'];
+                        $active3 = $value['is_active'];
+                    }
+
+                    $bool = false;
+                    if (hash('sha512', $salt3 . $plainpassword) == $password3) {
+                        $bool = true;
+                    } else {
+//                        $boolean_return = false;
+                    }
+                    if ($bool) {
+// insert new user
+
+                        if ($username3 != 'admin') {
+//                            var_dump($nom_bdd);
+
+                            $user->setEmail($username3 . '@' . $nom_bdd . '.' . 'fr');
+                            $user->setUsername($username3);
+                            $user->setSalt($salt3);
+                            $user->setPassword($password3);
+                            $user->setIsActive($active3);
+                            $user->setRoles(array('ROLE_USER'));
+                            $db->persist($user);
+//                            die('re enter');
+                            $db->flush();
+//                            $boolean_return = true;
+//                            die('success');
+                            break;
+                        }
+                    }
+                }
+            }

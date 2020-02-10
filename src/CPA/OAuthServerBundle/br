@@ -1,0 +1,74 @@
+https://gist.github.com/tjamps/11d617a4b318d65ca583
+
+foso bundle + routing:
+
+https://github.com/FriendsOfSymfony/FOSOAuthServerBundle/blob/master/Resources/doc/index.md
+
+php bin/console doctrine:fixtures:load --fixtures=src/CPA/OAuthServerBundle
+
+firewalls:
+
+    oauth_token:
+        pattern:    ^/oauth/v2/token
+        security:   false
+
+    api_firewall:
+        pattern: ^/api/.*
+        fos_oauth: true
+        stateless: true
+        anonymous: false
+
+    secure_area:
+        pattern:    ^/
+        fos_oauth: true
+        form_login:
+            provider: user_provider 
+            check_path: /oauth/v2/auth_login_check
+            login_path: /oauth/v2/auth_login
+        logout:
+            path:   /logout
+            target: /
+        anonymous: ~
+
+access_control:
+    - { path: ^/oauth/v2/auth_login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+
+ancien tuto:
+
+http://blog.logicexception.com/2012/04/securing-syfmony2-rest-service-wiith.html
+
+
+class LoadClientData extends AbstractFixture implements OrderedFixtureInterface {
+
+
+/**
+     * {@inheritDoc}
+     */
+    public function getOrder() {
+        return 100;
+    }
+}
+
+-------------
+
+lre_platform.curentuser:
+    class: LRE\PlatformBundle\Form\PlatformType
+    arguments:
+        - "@security.token_storage" // J'ai aussi essayé service_container
+
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
+$token = $this->container->get('security.token_storage')->getToken()
+
+
+redirectionListener:
+        class: Paie\PaieBundle\Listener\RedirectionListener
+        arguments: [@security.authentication.manager, @service_container, @session, @doctrine.orm.entity_manager]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onkernelRequest}
+
+/**
+     * @ORM\ManyToMany(targetEntity="CPA\UserBundle\Entity\User", mappedBy="client")
+     */
+    protected $user;

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <!--h1>Login!</h1-->
+
+                {% if error %}
+                    <div class="alert alert-danger">
+                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    </div>
+                {% endif %}
+
+                <form id="login_form" class="form-signin" method="POST">
+                    <h2 class="form-signin-heading">FullOffice-CPA</h2>
+                    <label for="inputEmail" class="sr-only">Login</label>
+                    <input type="email" id="{{form._username.vars.id}}" name="{{form._username.vars.name}}" value="{{form._username.vars.value}}" class="form-control" placeholder="login" required autofocus>
+                    <label for="inputPassword" class="sr-only">Mot de Passe</label>
+                    <input type="password" id="login_form__password" name="_password" class="form-control" placeholder="mot de passe" required>
+                     <input type="hidden" name="_token"
+                       value=""
+                       >
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                    &nbsp;
+                </form>
+
+
+
+
+                {{dump(form._username)}}
+                {{dump(form._username.vars.value)}}
+                {{dump(form._username.vars.id)}}
+                {{dump(form._username.vars.name)}}
+                 {{dump(form._password)}}
+                 {{dump(form._token)}}
+                
+           
+
+                {#{ form_start(form) }}
+                {{ form_row(form._username) }}
+                {{ form_row(form._password) }#}
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                       >
+                <!--input type="hidden" id="get_uri_redirect" value="{#{url}#}" -->
+                <!--button type="submit" class="btn btn-success">Login <span class="fa fa-lock"></span></button-->
+
+<!--a href="{#{ path('user_register') }#}">Register</a-->
+                {#{ form_end(form) }#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+//var url = $("#get_uri_redirect").val();
+            //alert('url');
+            //alert('ffff');
+            //InitTypePret();
+            //window.location.href = "http://knpsf3-test.dev/app_dev.php/oauth/v2/auth_login?client_id=6_2qqlwedph6yosks0kw8sog0cgggw44gg48kogs404s4g44kw8";
+
+            //window.location.reload();
+        });
+
+        //window.location.href= "http://knpsf3-test.dev/app_dev.php/oauth/v2/auth_login?client_id=6_2qqlwedph6yosks0kw8sog0cgggw44gg48kogs404s4g44kw8";
+
+        //window.stop();
+    </script>
+{% endblock %}

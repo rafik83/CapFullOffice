@@ -1,0 +1,8 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: db_cpa_fulloffice
+    database_user: root
+    database_password: baxe6Equ
+    secret: c6100494a43432fe0609e87e3e811a36b1d17fa4

@@ -1,0 +1,80 @@
+custom_provider + stackoverflow:
+https://stackoverflow.com/questions/40386573/symfony-fos-oauth-with-custom-user
+
+
+https://stackoverflow.com/questions/21421632/how-to-override-tokencontroller-for-fosoauthserverbundle
+
+In app/config/services.yml:
+
+fos_oauth_server.controller.token:
+  class: ApiBundle\Controller\OAuth\TokenController
+  arguments: [@fos_oauth_server.server, @doctrine.orm.entity_manager]
+
+
+namespace OAuth2Bundle\Controller;
+
+use Doctrine\ORM\EntityManager;
+use FOS\OAuthServerBundle\Controller\TokenController as BaseController;
+use OAuth2\OAuth2;
+use Symfony\Component\HttpFoundation\Request;
+
+class TokenController extends BaseController {
+
+    /**
+     * @var EntityManager
+     */
+    private $em;
+
+    /**
+     * @param OAuth2 $server
+     */
+    public function __construct(OAuth2 $server, EntityManager $entityManager )
+    {
+        parent::__construct($server);
+        $this->em = $entityManager;
+    }
+
+    public function tokenAction(Request $request)
+    {
+        // Do whatever you like here
+
+        $result = parent::tokenAction($request);
+
+        // More custom code.
+
+        return $result;
+    }
+}
+
+------------------
+
+$user->setUsername($name);
+    $user->setEmail($email);
+    $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+    $password_user = $encoder->encodePassword($password, $user->getSalt());
+    $user->setPassword($password_user);
+
+    $clientManager = $this->get('fos_oauth_server.client_manager.default');
+    $client = $clientManager->createClient();
+    $client->setRedirectUris(array('http://localhost:8888/app_dev.php'));
+    $client->setAllowedGrantTypes(array('token', 'authorization_code'));
+    $clientManager->updateClient($client);
+
+    $user->setClient($client);
+
+    // Here we would like to authorize the user witout redirection :
+    return $this->redirect($this->generateUrl('fos_oauth_server_authorize', array(
+                'client_id'     => $client->getPublicId(),
+                'redirect_uri'  => 'http://localhost:8888/app_dev.php',
+                'response_type' => 'code'
+            )));
+
+// Symfony 2.5
+$user = $this->get('security.context')->getToken()->getUser();
+// Symfony 2.6
+$user = $this->get('security.token_storage')->getToken()->getUser();
+
+// Symfony 2.5
+if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) { ... }
+// Symfony 2.6
+if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) { ... }

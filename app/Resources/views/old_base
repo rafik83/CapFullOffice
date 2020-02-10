@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}FullOfficeCPA{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+            <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" href="{{ asset('css/theme_fulloffice.css') }}">
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            <link rel="stylesheet" href="{{ asset('css/admin-forms_fulloffice.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/custom_fulloffice.css') }}">
+                 <style>
+
+            body.sb-top #sidebar_left .sidebar-menu > li.active > a, body.sb-top #sidebar_left .sidebar-menu > li:hover > a, body.sb-top #sidebar_left .sidebar-menu > li > a.menu-open, body.sb-top #sidebar_left .sidebar-menu > li > a:hover, body.sb-top #sidebar_left .sidebar-menu > li > a:focus {
+                background-color: {{ mycolor }} !important;
+            }
+            body.sb-top #sidebar_left .sidebar-menu > li > a {
+                color: #fff;
+            }
+            .clx2{
+
+                background-color: #7bc142 !important;
+                color: #FFFFFF;
+            }
+            #sidebar_left {
+                background-color: {{ mycolor|change_color(-0.7) }};
+            }
+
+            .btn-primary {
+                background-color: {{ mycolor }} !important;
+            }
+            .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+                background-color: {{ mycolor|change_color(-0.7) }} !important;
+                border-color: {{ mycolor }} !important;
+            }
+            .text-primary {
+                color: {{ mycolor }};
+            }
+            .label-primary {
+                background-color: {{ mycolor|change_color(-0.7) }};
+            }
+            .progress-bar-primary {
+                background-color: {{ mycolor|change_color(-0.7) }};
+            }
+            a {
+                color: {{ mycolor }};
+                text-decoration: none;
+            }
+            a:hover {
+                color: {{ mycolor|change_color(-0.7) }};
+                text-decoration: none;
+            }
+            .ui-pnotify.custom .ui-pnotify-container {
+                background-color: {{ mycolor }} !important;
+                background-image: none !important;
+                border: none !important;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                width: 350px;
+                padding-top: 10px;
+                padding-bottom: 1px;
+
+
+            }
+            .sidebar-menu > li > ul > li > a {
+                color: #fff;
+            }
+            .sidebar-menu > li > ul {
+                background-color: {{ mycolor }};
+            }
+            .badge_custom {
+                background-color: {{ mycolor }};
+                font-size: 10px !important;
+            }
+            /* Sub-Menu Active Item - Icon Color */
+            .sidebar-menu > li > ul > li.active > a > span:nth-child(1),
+            .sidebar-menu > li > ul > li > a.menu-open > span:nth-child(1) {
+                color: {{ mycolor|change_color(-0.7) }} !important;
+            }
+
+            .sidebar-menu > li > ul > li:hover > a:after, .sidebar-menu > li > ul > li:focus > a:after , .sidebar-menu > li > ul > li:active > a:after{
+                background:  {{ mycolor|change_color(-0.7) }} !important;
+            }
+            .bg-primary.light {
+                background-color: {{ mycolor|change_color(-0.7) }} !important;
+            }
+            .bg-primary.light:hover {
+                background-color: {{ mycolor }} !important;
+            }
+        </style>
+        {% endblock %}
+        
+       
+    </head>
+    <body>
+        <div class="search-bar">
+            <form method="GET" action="" class="js-sea-search sea-search">
+                <input type="search" name="q" placeholder="Search Sea Creatures" autocomplete="off" class="search-input">
+            </form>
+        </div>
+        <!--header class="header">
+            <img class="logo-icon" src="{#{ asset('images/aquanote-logo.png') }#}">
+            <h1 class="logo">Intersa Saas</h1>
+            <ul class="navi">
+        <!--li class="search"-->
+
+
+        <!--a href="#" class="js-header-search-toggle">
+        <!--i class="fa fa-search"></i-->
+        <!--/a-->
+        <!--/li-->
+
+        {#% if is_granted('ROLE_USER') %#}
+        {#{'logout'}#}
+        <!--li><a href="{#{ path('security_logout') }#}">Logout</a></li-->
+        <!--li><a href="{#{ path('fos_user_security_logout') }#}">Logout</a></li-->
+        {#% else %#}
+        {#{'login'}#}    
+    <!--li><a href="{#{ path('security_login') }#}">Login</a></li-->
+    <!--li><a href="{#{ path('fos_user_security_login') }#}">Login</a></li-->
+        {#% endif %#}
+        <!--/ul-->
+        <!--/header-->
+
+        <div class="main-content">
+            {#% for msg in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ msg }}
+                </div>
+            {% endfor %#}
+
+        {% block body %}{% endblock %}
+    </div>
+
+    <!--div class="footer">
+        <p class="footer-text"> <span class="heart"></span> </p>
+    </div-->
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery-1.11.1_fulloffice.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui_fulloffice.min.js') }}"></script>
+        <script src="{{ asset('js/main_fulloffice.js') }}"></script>
+        <script src="{{ asset('js/utility_fulloffice.js') }}"></script>
+        <script src="{{ asset('js/demo_fulloffice.js') }}"></script>
+        <script src="{{ asset('js/modernizr-custom_fulloffice.js') }}"></script>
+        <script src="{{ asset('js/polyfiller_fulloffice.js') }}"></script>
+        <script src="{{ asset('js/formcfg-fr_fulloffice.js') }}"></script>
+    {% endblock %}
+</body>
+</html>
+

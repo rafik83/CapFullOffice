@@ -1,0 +1,8 @@
+ /**
+     * @ORM\ManyToMany(targetEntity="CPA\OAuthServerBundle\Entity\Client", inversedBy="users")
+     * @ORM\JoinTable(name="users_client",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="client_id", referencedColumnName="id")}
+     *      )
+     **/  
+    protected $client;

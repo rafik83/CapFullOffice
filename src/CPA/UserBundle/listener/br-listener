@@ -1,0 +1,52 @@
+$client = $this->em->getRepository('OAuthServerBundle:Client')->find(4);
+        $id = $client->getId();
+        $randomId = $client->getRandomId();
+        $client_id = $id . '_' . $randomId;
+        $secret = $client->getSecret();
+        $data = $client->getRedirectUris();
+        $redirectUris = $data[0];
+        $md5 = md5(uniqid(mt_rand(), true));
+        $request = $this->requestStack->getCurrentRequest();
+        
+        
+        var_dump($request->get('oauth.state'));
+        $request->set('oauth.state', $md5);
+        var_dump($request->get('oauth.state'));
+        die('jjj');
+        var_dump($request->getSession()->get('oauth.state'));
+        die('jjj');
+        $request->getSession()->set('oauth.state', $md5);
+        $state = $request->getSession()->get('oauth.state');
+        $first8 = substr($state, 0, 8);
+        $state2 = substr($state, 8);
+        $first4 = substr($state2, 0, 4);
+        $state3 = substr($state2, 4);
+        $first42 = substr($state3, 0, 4);
+        $state4 = substr($state3, 4);
+        $first43 = substr($state4, 0, 4);
+        $therest = substr($state, 20, 12);
+        $state_finale = $first8 . '-' . $first4 . '-' . $first42 . '-' . $first43 . '-' . $therest;
+
+
+$parameters = [
+            'response_type' => 'code',
+            'client_id' => $client_id,
+            'redirect_uri' => $redirectUris,
+            'scope' => 'read',
+            'state' => $state_finale,
+        ];
+        $url = Request::create($request->getUriForPath('/oauth/v2/auth'), 'GET', $parameters)->getUri();
+        var_dump($url);
+        die('hounni');
+        return new RedirectResponse($url);
+
+function pour redirection :
+
+https://www.sanwebe.com/2012/11/login-with-google-api-php:
+
+ $redirect_uri = 'http://www.example.com/';
+        header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+        exit;
+
+
+

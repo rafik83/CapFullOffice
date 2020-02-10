@@ -1,0 +1,175 @@
+  var_dump($client->getSecret());
+//            die('acc');
+
+
+//            $username = 'rturki';
+//            $password = '0000';
+//            $grantRequest = new Request(array(
+//                'client_id' => $client->getPublicId(),
+//                'client_secret' => $client->getSecret(),
+//                'redirect_uri' => 'http://www.example.com',
+//                'grant_type' => 'password',
+//                'username' => $username,
+//                'password' => $password
+//            ));
+//            var_dump($this->get('fos_oauth_server.server'));
+//            die('acc');
+//            return $this->redirect($this->generateUrl('fos_oauth_server_authorize', array(
+//                                'client_id' => $client->getPublicId(),
+//                                'client_secret' => $client->getSecret(),
+//                                'redirect_uri' => 'http://www.example.com',
+//                                'grant_type' => 'password',
+//                                'username' => $username,
+//                                'password' => $password
+//            )));
+
+//            $grantRequest = new Request(array(
+//                'client_id' => $client->getPublicId(),
+//                'redirect_uri' => 'http://www.example.com',
+//                'response_type' => 'code',
+//                'scope' => 'read',
+//                'state' => $state_finale
+//            ));
+//            
+            
+//            
+//            $tokenResponse = $this->get('fos_oauth_server.server')->grantAccessToken($grantRequest);
+//            $token = $tokenResponse->getContent();
+//        var_dump($client);
+//        die('hhhh');
+
+//        $tokenManager = $this->get('fos_oauth_server.access_token_manager.default');
+////        var_dump($tokenManager);
+////        die('herre');
+//        $token = $this->get('security.token_storage')->getToken();
+////        var_dump($token);
+////        die('herre');
+//        $accessToken = $tokenManager->findTokenByToken($token);
+//        var_dump($accessToken);
+//        die('herre');
+//
+//        $client = $accessToken->getClient();
+//        var_dump($this->get('security.authorization_checker')->isGranted('ROLE_USER'));
+//        die('role ROLE_USER');
+
+
+
+
+
+//            return $this->redirect($this->generateUrl('fos_oauth_server_token', array(
+//                                'client_id' => $client->getPublicId(),
+//                                'client_secret' => $client->getSecret(),
+//                                'redirect_uri' => 'http://www.example.com',
+//                                'grant_type' => 'client_credentials'                           
+//            )));
+
+//            $client->setAllowedGrantTypes(array('token', 'authorization_code'));
+//            $client->setAllowedGrantTypes(array('client_credentials'));
+//            $client->setAllowedGrantTypes(array('password'));//client_credentials refresh_token
+
+//            $authcode = $this->container->get('fos_oauth_server.auth_code_manager.default');
+//            $acesstoken = $this->container->get('fos_oauth_server.access_token_manager.default');
+//            $refreshtoken = $this->container->get('fos_oauth_server.refresh_token_manager.default');
+------------------------------------------
+
+$consultantsEm = $this->get('doctrine')->getManager('consultants');
+        $externpaieEm = $this->get('doctrine')->getManager('externpaie');
+        $romarainEm = $this->get('doctrine')->getManager('romarain');
+        $bailaEm = $this->get('doctrine')->getManager('baila');
+        $seawolEm = $this->get('doctrine')->getManager('seawol');
+        $keolisEm = $this->get('doctrine')->getManager('keolis');
+        $jeanjeanEm = $this->get('doctrine')->getManager('jeanjean ');
+
+-------------------------------------------------------------
+https://stackoverflow.com/questions/36851309/symfony-fosoauthserverbundle-get-tokens-programmatically
+$grantRequest = new Request(array(
+        'client_id'  => $clientId,
+        'client_secret' => $clientSecret,
+        'grant_type' => 'password',
+        'username' => $username,
+        'password' => $password
+    ));
+
+$tokenResponse = $this->get('fos_oauth_server.server')->grantAccessToken($grantRequest);
+
+$token = $tokenResponse->getContent();
+
+
+
+----------------------
+
+https://stackoverflow.com/questions/21628443/get-current-client-on-controller-using-fosoauthserverbundle
+*
+$tokenManager = $container->get('fos_oauth_server.access_token_manager.default');
+$accessToken = $tokenManager->findTokenByToken(
+    $container->get('security.context')->getToken()->getToken()
+);
+$client = $accessToken->getClient();
+
+---------------
+https://www.developpez.net/forums/d1525283/php/bibliotheques-frameworks/symfony/fosoauthserverbundle-creer-access_token/
+
+
+ protected function getAuth2Token($user, $request)
+    {
+        $clientManager = $this->get('fos_oauth_server.client_manager.default');
+        $client = $clientManager->createClient();
+        $client->setRedirectUris(['http://clinet.local/']);
+        $client->setAllowedGrantTypes(['password']);
+        $clientManager->updateClient($client);
+        $request2 = new Request();
+        $request2->query->add([
+            'client_id' => $client->getPublicId(),
+            'client_secret' => $client->getSecret(),
+            'grant_type' => 'password',
+            'username' => $user->getUsername(),
+            'password' => $request->get('password')
+        ]);
+
+-------------------------------------------------------
+
+   public function KolisExisteUser() {
+        $current_user = $this->container->get('security.token_storage')->getToken()->getUser();
+        $cuurent_username = $current_user->getUsername();
+        var_dump($current_user);
+        var_dump($cuurent_username);
+        die;
+
+
+
+
+
+        $db = $this->get('doctrine')->getManager('default');
+        $keolisTestEm = $this->get('doctrine')->getManager('keolisTest');
+
+        $sql = "SELECT * FROM keolis_test.user
+             where username = '2840299422026' ";
+        $stmt = $keolisTestEm->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = array();
+        $result = $stmt->fetchAll();
+
+        foreach ($result as $key => $value) {//username password salt id 
+            $id = $value['id'];
+            $username = $value['username'];
+            $password = $value['password'];
+            $salt = '9099396596f6700d3e5b'; //$value['salt'];
+            $active = $value['is_active'];
+        }
+
+        $bool = false;
+        if (hash('sha512', $salt . '1234') == $password) {
+            $bool = true;
+        }
+
+        // insert new user
+
+        $u = new User();
+        $u->setEmail($username . '@keolisTest.fr');
+        $u->setUsername($username);
+        $u->setSalt($salt);
+        $u->setPassword($password);
+        $u->setEnabled($active);
+        $db->persist($u);
+        $db->flush();
+    }

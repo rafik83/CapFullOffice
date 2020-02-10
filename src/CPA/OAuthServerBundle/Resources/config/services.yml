@@ -1,0 +1,4 @@
+services:
+#    o_auth_server.example:
+#        class: CPA\OAuthServerBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

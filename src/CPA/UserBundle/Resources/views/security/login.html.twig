@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="center-block" style="margin-left: -162px;margin-top: -24px;">
+                    <div class="modal-dialog" style="margin-bottom:0">
+                        <div class="modal-content">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title"></h3>
+                            </div>
+                            {% if error %}
+                                <div class="alert alert-danger">
+                                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                </div>
+                            {% endif %}
+                            {#{ form_start(form) }#}
+                            <div class="panel-body">
+                                <form role="form" method="post" action="">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            {{ form_widget(form._username, {'attr': {'class': 'form-control','placeholder': 'Login','autofocus': ''} }) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_widget(form._password, {'attr': {'class': 'form-control','placeholder': 'Mot de passe','type': 'password'} }) }} 
+                                        </div>
+
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}"
+                                               >
+                                        <!-- Change this to a button or input when using this as a form -->
+                                        <button type="submit" class="btn btn-primary" style="">Connexion <!--span class="fa fa-lock"></span--></button>
+                                        &nbsp;
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div> 
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //var tt = $("#login_form__password").html();
+            //alert(tt);
+        });
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,1 @@
+@Route("/oauth/v2/{token}", name="security_login",requirements={"token" = ".+"})

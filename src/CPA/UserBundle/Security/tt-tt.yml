@@ -1,0 +1,18 @@
+#parameters:
+#    platform.entity.user.class: CPA\UserBundle\Entity\User
+#    platform.user.provider.class: CPA\UserBundle\Provider\UserProvider
+#
+#services:
+#    platform.user.manager:
+#        class: Doctrine\ORM\EntityManager
+#        factory_method: getManagerForClass
+#        factory_service: doctrine
+#        arguments: ['%platform.entity.user.class%']
+#    platform.user.repository:
+#        class: CPA\UserBundle\Repository\UserRepository
+#        factory_method: getRepository
+#        factory_service: platform.user.manager
+#        arguments: ['%platform.entity.user.class%']
+#    platform.user.provider:
+#        class: %platform.user.provider.class%
+#        arguments: ['@platform.user.repository']

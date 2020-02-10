@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Cpa Full Office{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+            <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-dynamic-tabs.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker-1.6.0.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <!--div class="search-bar">
+            <form method="GET" action="" class="js-sea-search sea-search">
+                <input type="search" name="q" placeholder="Search Sea Creatures" autocomplete="off" class="search-input">
+            </form>
+        </div-->
+        <div class="row">
+            <div class="col-md-12">
+                
+                <!--div class="center-block" style="">
+                    
+                </div-->
+            </div>
+        </div>
+        <header class="header" style="background-color:rgba(60, 175, 254, 0);padding-top:0px">
+            <img  class="responsive-image" src="{{ asset('images/logo_cpa.png') }}" style="padding-left: 700px;padding-top: 50px;">
+            <!--img class="logo-icon" src="{#{ asset('images/aquanote-logo.png') }#}"-->
+            <!--h1 class="logo">CPA</h1-->
+            <ul class="navi">
+                <!--li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li-->
+
+                {#% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('security_logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ path('security_login') }}">Login</a></li>
+                {% endif %#}
+            </ul>
+        </header>
+            <br>
+            <br>
+
+        <div class="main-content">
+            {% for msg in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+
+        {% block body %}{% endblock %}
+    </div>
+
+    <!--div class="footer">
+        
+    </div-->
+
+    {% block javascripts %}
+        <!--script src="//code.jquery.com/jquery-2.1.4.min.js"></script-->
+        <script src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-3.3.5/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-dynamic-tabs.js') }}"></script>
+        <script src="{{ asset('js/json-stringify.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datepicker-1-6-0.min.js') }}"></script>
+
+        <script src="{{ asset('js/ie-emulation-modes-warning.js') }}"></script>
+        <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+    {% endblock %}
+</body>
+</html>

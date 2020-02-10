@@ -1,0 +1,110 @@
+
+var Entreprise = $("#entreprise_dropdawn").val();
+            //var Status = $("#status_dropdawn option:selected").text();
+            //var Adresse = $("#adresse_dropdawn").val();
+            var CategorieId = $("#categorie_dropdawn option:selected").val();
+            var PaysId = $("#pays_dropdawn option:selected").val();
+            //var VilleId = $("#ville_dropdawn").val();
+
+            var results = {"ligne": [
+                    {
+                        "entreprise": Entreprise,
+                        "categorise_id": CategorieId,
+                        "pays_id": PaysId,
+                    }], "tab_donateur_id": arr, "tab_oldcategorie_id": ArrycategorieId}
+
+
+            $.ajax({
+                url: "{{ path('modification_masse_donateur') }}", //,
+                type: "POST",
+                data: JSON.stringify(results),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (data)
+                {
+                    console.log(data);
+                    //console.log(data.responseText);
+
+
+                },
+                complete: function (com) {
+                    //console.log(com.responseText);
+                    console.log(com);
+                    //alert(com.responseText);
+
+
+
+                },
+                error: function (err) {
+                    console.log(err);
+                    //alert('err');
+                }
+            });
+          $("#addpopup-modification_masse").css('display', 'none');
+            window.location.reload();
+
+---------------------------------------------------------------------------------------
+
+   $json = $this->getRequest()->getContent();
+$data = json_decode($json, true);
+
+        
+        $entreprise = $data["ligne"][0]["entreprise"];
+       
+
+        $CategoriId = $data["ligne"][0]["categorise_id"];
+        $PaysId = $data["ligne"][0]["pays_id"];
+        $array_donateur_id = $data['tab_donateur_id'];
+
+ var results = {"ligne": [
+                    {
+                        "entreprise": 'Entreprise',
+                        "categorise_id": 'CategorieId',
+                        "pays_id": 'PaysId',
+                    }], "tab_donateur_id": 'arr', "tab_oldcategorie_id": 'ArrycategorieId'}
+
+-------------------------------------
+
+public function byParameter($nombanque, $codebanque, $telbanque, $pays, $ville) {
+        $qb = $this->createQueryBuilder('ab')
+                ->leftJoin('ab.payss', 'p')
+                ->leftJoin('ab.villes', 'v')
+                ->where('ab.nom LIKE :nom');
+        $qb = $qb->setParameter('nom', '%' . $nombanque . '%');
+        if ($codebanque != '' && $codebanque != NULL) {
+            $qb = $qb->andWhere('ab.codeBanque LIKE :codeBanque');
+            $qb = $qb->setParameter('codeBanque', '%' . $codebanque . '%');
+        }
+        if ($telbanque != '' && $telbanque != NULL) {
+            $qb = $qb->andWhere('ab.telepohone LIKE :telepohone');
+            $qb = $qb->setParameter('telepohone', '%' . $telbanque . '%');
+        }
+        if ($pays != '' && $pays != NULL) {
+            $qb = $qb->andWhere('p.nom LIKE :nompays');
+            $qb = $qb->setParameter('nompays', '%' . $pays . '%');
+        }
+        if ($ville != '' && $ville != NULL) {
+            $qb = $qb->andWhere('v.nomVille LIKE :nomville');
+            $qb = $qb->setParameter('nomville', '%' . $ville . '%');
+        }
+        $qb = $qb->getQuery()->getResult();
+        return $qb;
+    }
+
+------------------
+
+knpuniv:
+
+https://knpuniversity.com/screencast/symfony-forms/date-picker-field
+https://knpuniversity.com/screencast/symfony-forms/date-picker-field
+
+----------
+
+date picker
+https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css
+
+https://cdnjs.com/libraries/bootstrap-datepicker/1.6.0
+
+fonction datepicker:
+https://bootstrap-datepicker.readthedocs.io/en/latest/

@@ -1,0 +1,57 @@
+ php bin/console debug:router
+
+ php bin/console debug:container
+
+tuto multi conn + sf3
+
+http://ourcodeworld.com/articles/read/137/how-to-use-more-than-one-database-using-doctrine-orm-in-symfony-3
+
+
+php bin/console doctrine:schema:update --force --em=analytics
+
+php bin/console doctrine:schema:update --force --em=default
+
+
+https://stackoverflow.com/questions/28432403/get-refresh-token-with-fosoauthserverbundle
+
+'issue_refresh_token' => true
+
+http_buildquery + fosoauthserverbundle :
+
+https://stackoverflow.com/questions/21259190/how-to-implement-fosoauthserverbundle-to-secure-a-rest-api
+
+"zircote/swagger-php": "^2.0",
+
+https://fr.slideshare.net/weaverryan/symfony-guard-authentication-fun-with-api-token-social-login-jwt-and-more
+
+https://stackoverflow.com/questions/12750050/how-to-create-datetime-object-from-string-in-symfony2-php
+
+https://stackoverflow.com/questions/10955563/storing-doctrine2-datetime-in-utc-only
+
+http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/working-with-datetime.html
+
+http://php.qahowto.com/Authorization-header-missing-in-PHP-POST-request-php-apache-http-header-authorization-193fd6d
+
+http://php.qahowto.com/Guzzle-HTTP-add-Authorization-header-directly-into-request-php-rest-http-guzzle-guzzle6-2257f0e
+
+http://php.qahowto.com/questions/tagged/guzzle/http
+
+Installation avec Homebrew:
+
+https://stackoverflow.com/questions/33353618/can-i-use-brew-on-ubuntu
+
+
+rest api + swagger:
+https://www.youtube.com/watch?v=wC5hxY0RItQ
+
+install swagger:
+
+https://www.youtube.com/watch?v=3ZK7TsA8a9Q
+
+How to create DateTime object from string in symfony2/php
+https://stackoverflow.com/questions/12750050/how-to-create-datetime-object-from-string-in-symfony2-php
+
+
+
+
+

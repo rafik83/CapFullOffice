@@ -1,0 +1,137 @@
+
+//        //https://github.com/adoy/PHP-OAuth2
+//        //https://causeyourestuck.io/2016/07/19/oauth2-explained-part-3-using-oauth2-bare-hands/
+//        //http://docs.guzzlephp.org/en/stable/
+//        //https://codereviewvideos.com/course/beginner-friendly-hands-on-symfony-3-tutorial/video/getting-real-data-from-github-with-guzzle
+        //https://stackoverflow.com/questions/34696406/curl-error-60-see-http-curl-haxx-se-libcurl-c-libcurl-errors-html?rq=1
+        //https://api.github.com/users/codereviewvideos
+        ////http://knpsf3-test.dev/app_dev.php/
+//        $url = 'http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=23_1zuq8svg8gqsos0wc8woc00k4g8s44k8s0ogsw0sk4k800008o&client_secret=2e1ou61geby808ckog8woowo88w0ccs4o8gc0g8kgoc0scc40o&grant_type=client_credentials';
+//        $response = $client->request('GET', 'https://api.github.com/users/codereviewvideos');
+        //http%3A%2F%2Fwww.moncompteactivite.gouv.fr
+//        $urlx = "http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id='" . $Client_ID . "'";
+//        $urlx .= "&";
+//        $urlx .= "client_secret='" . $Client_Secret . "'";
+//        $urlx .= "&";
+//        $urlx .= "grant_type='" . $Grant_Type . "'";
+//        die('endpoint');
+//        $Client_ID = '23_1zuq8svg8gqsos0wc8woc00k4g8s44k8s0ogsw0sk4k800008o';
+//        $Client_Secret = '2e1ou61geby808ckog8woowo88w0ccs4o8gc0g8kgoc0scc40o';
+//        $Grant_Type = 'client_credentials';
+////        $Grant_Type2 = 'authorization_code';
+//        $redirect_uri_x = 'http://knpsf3-test.dev/app_dev.php/authorize';
+//        $http = new \GuzzleHttp\Client('http://knpsf3-test.dev/app_dev.php', array(
+//            'request.options' => array(
+//                'exceptions' => false,
+//            )
+//        ));
+//        $urlx = "http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id='" . $Client_ID . "'";
+//        $urlx .= "&";
+//        $urlx .= "client_secret='" . $Client_Secret . "'";
+//        $urlx .= "&";
+//        $urlx .= "grant_type='" . $Grant_Type . "'";
+//        $urlx .= "&";
+////        $urlx .= "code='" . $_GET['code'] . "'";
+////        $urlx .= "&";
+//        $urlx .= "redirect_uri='" . $redirect_uri_x . "'";
+//        $baseServiceURL = 'http://knpsf3-test.dev/app_dev.php/oauth/v2/token';
+//        $urlx2 = "http://knpsf3-test.dev/app_dev.php/oauth/v2/token?client_id=23_1zuq8svg8gqsos0wc8woc00k4g8s44k8s0ogsw0sk4k800008o&client_secret=2e1ou61geby808ckog8woowo88w0ccs4o8gc0g8kgoc0scc40o&grant_type=client_credentials&code=Njk4OTJjOGVmMTBhZTc0MmU5YTZiZWM5M2NmNzEyM2Y3YjViZmYwNzA1OWIxNTBlYmNmZTU5ODQ5OGIwZjU1NQ&redirect_uri=http://knpsf3-test.dev/app_dev.php/authorize";
+//        $baseServiceURL = $urlx;
+//        $theHeaders = ['Content-Type' => 'application/json', 'Accept' => 'application/json', 'token' => $_GET['code']];
+//        $updateRequestClient = new \GuzzleHttp\Client(array(
+//            'base_uri' => $baseServiceURL,
+//            'headers' => $theHeaders
+//        ));
+//        dump($baseServiceURL);
+//        die('$baseServiceURL');
+//        $baseServiceURL2 = 'http://knpsf3-test.dev/app_dev.php/oauth/v2/token';
+//        $http = new \GuzzleHttp\Client(array(
+//            'base_uri' => $baseServiceURL, //$baseServiceURL
+//            'headers' => $theHeaders
+//        ));
+//        dump($resultrrr);
+//        die('$http');
+//        $updateRequestResponse = $http->post($baseServiceURL, ['headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json', 'token' => $_GET['code']]
+//            , 'body' => '']); // json_encode($updateBody, JSON_FORCE_OBJECT)
+//        dump($updateRequestResponse);
+//        die('$updateRequestResponse');
+        //array('content-type' => 'application/json')
+//        $baseServiceURLxxx = '/token';
+//        $requestx = $http->post($baseServiceURL2, null, array(
+//            'client_id' => $Client_ID,
+//            'client_secret' => $Client_Secret,
+//            'grant_type' => $Grant_Type,
+//            'code' => $_GET['code'],
+//            'redirect_uri' => $redirect_uri_x,
+//        ));
+//
+//        dump($requestx);
+//        die('$requestx');
+//        $responsex = $requestx->send();
+//        $responseBodyx = $responsex->getBody(true);
+//        $responseArrx = json_decode($responseBodyx, true);
+//        $accessTokenx = $responseArrx['access_token'];
+//        $expires_inx = $responseArrx['expires_in'];
+//        $requestx = $http->get('/api/articles');
+//        $requestx->addHeader('Authorization', 'Bearer ' . $accessTokenx);
+//        $responsex = $requestx->send();
+//        dump($responsex->getBody());
+//        die('$responsex');
+//        die('client_id');
+//        $CLIENT_ID = '23_1zuq8svg8gqsos0wc8woc00k4g8s44k8s0ogsw0sk4k800008o';//$_GET['client_id'];
+//        $CLIENT_SECRET = '2e1ou61geby808ckog8woowo88w0ccs4o8gc0g8kgoc0scc40o';//$_GET['client_secret'];
+//        $clientManager = new OAuth2\Client($CLIENT_ID, $CLIENT_SECRET);
+//        dump($clientManager);
+//         die('client');
+//        dump($username);
+//        die('tokenauth');
+//         dump($token_auth);
+//        die('$token_auth');
+//        dump($accessToken);
+//        die('ici');
+//        $entity = $this->GetClientBy($token); //$em->getRepository('OAuthServerBundle:AccessToken')->findBy(array('token'=>$token));
+//        if ($entity) {
+//            $client_id = $entity[0]['client_id'];
+//            $entity_access_token = $em->getRepository('OAuthServerBundle:AccessToken')->findBy(array('token' => $token));
+//            $entity_client = $em->getRepository('OAuthServerBundle:Client')->find($client_id);
+//            dump($entity_access_token);
+//            dump($entity_user);
+//        }
+//        $parameters = [
+//            'access_token' => $accessToken,
+//        ];
+//        $headers = ['HTTP_AUTHORIZATION' => 'Bearer' . '     ' . $accessToken];
+//        $headers = ['Authorization' => 'Bearer' . '     ' . $accessToken];
+//        $headers = ['Authorization' => 'Bearer' . $accessToken];
+//
+//        $request->headers->add($headers);
+//        $request->headers->add('Authorization', 'Bearer' . $accessToken);
+//        dump($request);
+//        die('$request');
+//        $request->getUriForPath('/api/articles');
+//         dump($request->getUriForPath('/api/articles'));
+//        die('$request');
+        //http://knpsf3-test.dev/app_dev.php/oauth/v2/token/api/articles?access_token=NmVjMmQ3Y2U1YzZjNjRmYjkyN2U3NGYyNDBhMTdmYzEzNTllYmQ1NjM5MjExMzcyNjRiZGRiYTA2MTk1M2E4ZA
+        //NmVjMmQ3Y2U1YzZjNjRmYjkyN2U3NGYyNDBhMTdmYzEzNTllYmQ1NjM5MjExMzcyNjRiZGRiYTA2MTk1M2E4ZA
+//        $requestredirect = Request::create($request->getUriForPath('/api/user/profile'), 'GET', $parameters);
+//        $requestredirect = Request::create($request->getUriForPath('/user/profile'), 'GET', $parameters);
+//        $requestredirect = Request::create($request->getUriForPath('/user/profile'), 'GET', $parameters);
+//        $requestredirect->headers->add($headers);
+//        $requestredirect->headers->add('Authorization', 'Bearer' . $accessToken);
+//        $url2 = $requestredirect->getUri();
+//        $response = $request->send();
+//        return $this->RedirectResponse($url2);
+//        return new RedirectResponse($url2);
+//        return $this->redirect($url2);
+
+//    public function GetClientBy($token) {
+//        $em = $this->getDoctrine()->getManager();
+//        $query = "SELECT * FROM access_token";
+//        $query .= ' ';
+//        $query_where = "where  token ='" . $token . "'";
+//        $query_where .= ' ';
+//        $queryfinale = $query . $query_where;
+//        $stmt = $em->getConnection()->prepare($queryfinale);
+//        $stmt->execute();
+//        return $stmt->fetchAll();
+//    }

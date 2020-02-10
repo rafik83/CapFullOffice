@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {#% set mycolor =  'color'|get_theme  %#}
+        {#% set logo =  'logo'|get_theme  %#}
+        <meta charset="utf-8">
+        <title>{% block title %}FullOfficeCPA{% endblock %}</title>
+        <meta name="author" content="Intersa">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% block stylesheets %}
+            <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+            <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" href="{{ asset('css/theme_fulloffice.css') }}">
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+            <link rel="stylesheet" href="{{ asset('css/admin-forms_fulloffice.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/custom_fulloffice.css') }}">
+            <style>
+                body.sb-top #sidebar_left .sidebar-menu > li.active > a, body.sb-top #sidebar_left .sidebar-menu > li:hover > a, body.sb-top #sidebar_left .sidebar-menu > li > a.menu-open, body.sb-top #sidebar_left .sidebar-menu > li > a:hover, body.sb-top #sidebar_left .sidebar-menu > li > a:focus {
+                    background-color: #a52915 !important;
+                }
+                body.sb-top #sidebar_left .sidebar-menu > li > a {
+                    color: #fff;
+                }
+                .clx2{
+
+                    background-color: #7bc142 !important;
+                    color: #FFFFFF;
+                }
+                #sidebar_left {
+                    background-color: #741d0f;
+                }
+
+                .btn-primary {
+                    background-color: #a52915 !important;
+                }
+                .btn-primary:active, .btn-primary:hover, .btn-primary:focus {
+                    background-color: #741d0f !important;
+                    border-color: #a52915 !important;
+                }
+
+                .admin-form .panel-info.heading-border:before, .admin-form .panel-info .heading-border:before {
+                    background-color: #a52915;
+                }
+                .text-primary {
+                    color: #a52915;
+                }
+                a {
+                    color: #a52915;
+                    text-decoration: none;
+                }
+                a:hover {
+                    color: #741d0f;
+                    text-decoration: none;
+                }
+
+            </style>
+        {% endblock %}
+
+
+    </head>
+    <body class="sb-top sb-top-sm">
+        <!-- Start: Main -->
+        <div id="main">
+
+            <!-- Start: Header -->
+            <!--header class="navbar navbar-static-top navbar-shadow">
+                
+            </header-->
+            <!-- End: Header -->
+
+            <!-- Start: Sidebar -->
+     
+            {#% set stats = 'all'|get_stats %#}
+            <!-- Start: Content-Wrapper -->
+            <section id="content_wrapper">
+                {% if is_granted('ROLE_RH') %}
+                    <div id="topbar-dropmenu" class="alt topbar-menu-open" style="display: none;">
+                        <div class="topbar-menu row">
+                            <div class="col-xs-12 col-sm-3">
+                                <a href="#" class="metro-tile bg-primary light global-bar">
+
+                                    <span class="fa fa-archive fa-lg"></span>
+                                    <br /><br />
+                                    <span  class="bar-desc">Espace de stockage utilisé pour les fiches de paie</span>
+                                    <br />
+                                    <span  class="bar-numbers">Taille : </span>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <a href="#" class="metro-tile bg-primary light global-bar">
+
+                                    <span class="fa fa-server fa-lg"></span>
+                                    <br /><br />
+                                    <span  class="bar-desc">Espace de stockage utilisé pour les documents</span>
+                                    <br />
+                                    <span  class="bar-numbers">Taille : </span>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <a href="#" class="metro-tile bg-primary light global-bar">
+
+                                    <span class="fa fa-briefcase fa-lg"></span>
+                                    <br /><br />
+                                    <span  class="bar-desc">Nombre total de fiches de paie</span>
+                                    <br />
+                                    <span  class="bar-numbers">Nombre : </span>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <a href="#" class="metro-tile bg-primary light global-bar">
+
+                                    <span class="fa fa-file-text fa-lg"></span>
+                                    <br /><br />
+                                    <span  class="bar-desc">Nombre total de documents</span>
+                                    <br />
+                                    <span  class="bar-numbers">Nombre : </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!-- Begin: Content -->
+                <section id="content" class="animated fadeIn">
+
+                {% block body %}{% endblock %}
+
+            </section>
+            <!-- End: Content -->
+
+        </section>
+
+
+    </div>
+    <!-- End: Main -->
+</html>
+
